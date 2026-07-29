@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+---
+
+<BaseLayout title="找不到頁面｜龍潭大池旅遊指南" description="這個頁面不存在，返回龍潭大池旅遊指南首頁。" noindex={true}>
+  <Header />
+  <main class="relative grid min-h-[78vh] place-items-center overflow-hidden pt-[4.5rem] text-white">
+    <div class="absolute inset-0 top-[4.5rem]">
+      <ResponsiveImage name="longtan-blue-hour" alt="傍晚的龍潭大池吊橋與南天宮" class="h-full w-full object-cover" sizes="100vw" />
+      <div class="absolute inset-0 bg-lake-950/76"></div>
+    </div>
+    <div class="shell relative py-24 text-center">
+      <p class="font-serif text-8xl font-semibold text-gold-300 md:text-9xl">404</p>
+      <h1 class="mt-4 font-serif text-3xl font-semibold md:text-5xl">這條路沒有通往大池</h1>
+      <p class="mx-auto mt-5 max-w-lg text-sm leading-7 text-white/65">網址可能已變更，或頁面並不存在。回到首頁重新規劃你的龍潭大池散步路線。</p>
+      <a href="/" class="mt-8 inline-flex rounded-full bg-gold-300 px-6 py-3 text-sm font-bold text-lake-950 transition hover:bg-white">返回首頁</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

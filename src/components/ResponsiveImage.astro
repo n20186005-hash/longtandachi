@@ -1,0 +1,55 @@
+---
+interface Props {
+  name: 'longtan-golden-hour' | 'longtan-night' | 'longtan-blue-hour' | 'longtan-boardwalk' | 'longtan-nantian-temple';
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
+  objectPosition?: string;
+}
+
+const {
+  name,
+  alt,
+  class: className = '',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+  objectPosition = 'center',
+} = Astro.props;
+
+const dimensions = {
+  'longtan-golden-hour': [1280, 576],
+  'longtan-night': [1280, 720],
+  'longtan-blue-hour': [1280, 853],
+  'longtan-boardwalk': [1280, 640],
+  'longtan-nantian-temple': [1280, 960],
+} as const;
+
+const [width, height] = dimensions[name];
+---
+
+<picture>
+  <source
+    type="image/avif"
+    srcset={`/images/${name}-768.avif 768w, /images/${name}-1280.avif 1280w`}
+    {sizes}
+  />
+  <source
+    type="image/webp"
+    srcset={`/images/${name}-768.webp 768w, /images/${name}-1280.webp 1280w`}
+    {sizes}
+  />
+  <img
+    src={`/images/${name}.jpg`}
+    {alt}
+    {width}
+    {height}
+    {loading}
+    decoding="async"
+    {fetchpriority}
+    class={className}
+    style={`object-position:${objectPosition}`}
+  />
+</picture>

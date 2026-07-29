@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const photos = [
+  {
+    title: '黃昏時的龍潭南天宮與龍潭觀光大橋',
+    files: '首頁主視覺、社群分享圖',
+    author: 'Junyu-K',
+    source: 'https://commons.wikimedia.org/wiki/File:202507_%E9%BB%83%E6%98%8F%E6%99%82%E7%9A%84%E9%BE%8D%E6%BD%AD%E5%8D%97%E5%A4%A9%E5%AE%AE%E8%88%87%E9%BE%8D%E6%BD%AD%E8%A7%80%E5%85%89%E5%A4%A7%E6%A9%8B.jpg',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    changes: '縮放、格式轉換；社群分享圖另有裁切。',
+  },
+  {
+    title: '夜間的龍潭南天宮與龍潭大池觀光吊橋',
+    files: '夜景段落與頁尾行動區',
+    author: 'Junyu-K',
+    source: 'https://commons.wikimedia.org/wiki/File:202507_%E5%A4%9C%E9%96%93%E7%9A%84%E9%BE%8D%E6%BD%AD%E5%8D%97%E5%A4%A9%E5%AE%AE%E8%88%87%E9%BE%8D%E6%BD%AD%E5%A4%A7%E6%B1%A0%E8%A7%80%E5%85%89%E5%90%8A%E6%A9%8B.jpg',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+    changes: '縮放與格式轉換。',
+  },
+  {
+    title: '傍晚的龍潭觀光吊橋與龍潭南天宮 02',
+    files: '觀光吊橋景點亮點',
+    author: 'Junyu-K',
+    source: 'https://commons.wikimedia.org/wiki/File:202507_%E5%82%8D%E6%99%9A%E7%9A%84%E9%BE%8D%E6%BD%AD%E8%A7%80%E5%85%89%E5%90%8A%E6%A9%8B%E8%88%87%E9%BE%8D%E6%BD%AD%E5%8D%97%E5%A4%A9%E5%AE%AE_02.jpg',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    changes: '縮放與格式轉換。',
+  },
+  {
+    title: 'Wooden walking bridge on Longtan Lake (Taoyuan)',
+    files: '湖畔木棧步道景點亮點',
+    author: 'Junyu-K',
+    source: 'https://commons.wikimedia.org/wiki/File:202506_Wooden_walking_bridge_on_Longtan_Lake_(Taoyuan).jpg',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    changes: '縮放與格式轉換。',
+  },
+  {
+    title: '龍潭大池 南天宮 Nantian Temple on the Longtan Pond',
+    files: '南天宮亮點與同行者路線區',
+    author: 'Foxy Who (^∀^)/',
+    source: 'https://commons.wikimedia.org/wiki/File:%E9%BE%8D%E6%BD%AD%E5%A4%A7%E6%B1%A0_%E5%8D%97%E5%A4%A9%E5%AE%AE_Nantian_Temple_on_the_Longtan_Pond_-_panoramio.jpg',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    changes: '縮放與格式轉換。',
+  },
+];
+---
+
+<BaseLayout title="照片授權｜龍潭大池旅遊指南" description="LongtanDachi.com 使用的龍潭大池實景照片來源、作者與 Creative Commons 授權說明。" canonicalPath="/photo-credits/">
+  <Header />
+  <main class="min-h-screen bg-mist-50 pt-[4.5rem]">
+    <section class="bg-lake-950 py-20 text-white md:py-28">
+      <div class="shell">
+        <p class="text-xs font-bold tracking-[0.2em] text-gold-300">PHOTO CREDITS</p>
+        <h1 class="mt-4 font-serif text-4xl font-semibold md:text-6xl">照片授權</h1>
+        <p class="mt-6 max-w-2xl text-sm leading-8 text-white/65 md:text-base">本站使用的景點照片皆為真實拍攝，並依原作者指定的 Creative Commons 條款標示。除本頁必要的來源與授權連結外，網站主要旅遊內容盡量不放置外部連結。</p>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24">
+      <div class="shell max-w-4xl">
+        <div class="grid gap-5">
+          {photos.map((photo) => (
+            <article class="soft-card p-6 md:p-8">
+              <p class="text-xs font-bold tracking-[0.14em] text-temple-600">{photo.files}</p>
+              <h2 class="mt-3 font-serif text-2xl font-semibold text-lake-950">{photo.title}</h2>
+              <dl class="mt-5 grid gap-3 text-sm leading-7 text-ink-700 sm:grid-cols-[7rem_1fr]">
+                <dt class="font-bold text-lake-950">作者</dt><dd>{photo.author}</dd>
+                <dt class="font-bold text-lake-950">授權</dt><dd><a class="font-bold text-lake-700 underline decoration-lake-700/30 underline-offset-4 hover:text-temple-600" href={photo.licenseUrl} target="_blank" rel="license noopener noreferrer">{photo.license}</a></dd>
+                <dt class="font-bold text-lake-950">本站處理</dt><dd>{photo.changes}</dd>
+                <dt class="font-bold text-lake-950">原始檔案</dt><dd><a class="font-bold text-lake-700 underline decoration-lake-700/30 underline-offset-4 hover:text-temple-600" href={photo.source} target="_blank" rel="noopener noreferrer">查看 Wikimedia Commons 檔案頁</a></dd>
+              </dl>
+            </article>
+          ))}
+        </div>
+        <div class="mt-10 rounded-2xl border border-gold-500/35 bg-gold-300/15 p-6 text-sm leading-7 text-ink-700">
+          採用 CC BY-SA 的圖片衍生檔案（包含本站產生的縮放、裁切與格式轉換版本）依相同或相容授權提供。頁面文字、程式碼與其他網站元素不因此自動改採相同授權。
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

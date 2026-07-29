@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="relative overflow-hidden bg-lake-950 text-white">
+  <div class="pointer-events-none absolute inset-0 opacity-20" aria-hidden="true">
+    <svg class="h-full w-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
+      <path d="M-20 265C160 215 258 334 435 278s286-54 430-2 260-1 370-64" fill="none" stroke="#f0c879" stroke-width="2"/>
+      <path d="M-20 294c180-50 278 69 455 13s286-54 430-2 260-1 370-64" fill="none" stroke="#ffffff" stroke-opacity=".4"/>
+    </svg>
+  </div>
+  <div class="shell relative py-14 md:py-20">
+    <div class="grid gap-10 border-b border-white/12 pb-12 md:grid-cols-[1.3fr_1fr_1fr]">
+      <div>
+        <p class="font-serif text-3xl font-semibold tracking-[0.06em]">龍潭大池</p>
+        <p class="mt-4 max-w-md text-sm leading-7 text-white/65">一份以實際出遊需求為核心的獨立旅遊指南，陪你安排湖畔散步、黃昏夜景與龍潭半日行程。</p>
+        <p class="mt-6 inline-flex rounded-full border border-white/15 px-4 py-2 text-xs font-bold tracking-[0.16em] text-gold-300 uppercase">{site.domain}</p>
+      </div>
+      <div>
+        <p class="text-sm font-bold tracking-[0.14em] text-gold-300">站內導覽</p>
+        <div class="mt-5 grid gap-3 text-sm text-white/70">
+          <a class="transition hover:text-white" href="/#highlights">景點亮點</a>
+          <a class="transition hover:text-white" href="/#routes">散步路線</a>
+          <a class="transition hover:text-white" href="/#transport">交通與停車</a>
+          <a class="transition hover:text-white" href="/#faq">常見問題</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-sm font-bold tracking-[0.14em] text-gold-300">網站說明</p>
+        <div class="mt-5 grid gap-3 text-sm text-white/70">
+          <a class="transition hover:text-white" href="/photo-credits/">照片授權</a>
+          <p class="leading-6">本站為獨立旅遊資訊網站，非桃園市政府或景點官方網站。</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} LongtanDachi.com</p>
+      <p>內容會因天候、維護及現場營運調整，出發前請留意最新公告。</p>
+    </div>
+  </div>
+</footer>
