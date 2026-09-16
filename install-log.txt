@@ -1,0 +1,49 @@
+✓ Lockfile passes supply-chain policies (verified 16m ago)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +245
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 245, reused 245, downloaded 0, added 0
+Progress: resolved 245, reused 245, downloaded 0, added 3
+Progress: resolved 245, reused 245, downloaded 0, added 4
+Progress: resolved 245, reused 245, downloaded 0, added 5
+Progress: resolved 245, reused 245, downloaded 0, added 6
+Progress: resolved 245, reused 245, downloaded 0, added 7
+Progress: resolved 245, reused 245, downloaded 0, added 8
+Progress: resolved 245, reused 245, downloaded 0, added 9
+Progress: resolved 245, reused 245, downloaded 0, added 10
+Progress: resolved 245, reused 245, downloaded 0, added 11
+Progress: resolved 245, reused 245, downloaded 0, added 13
+Progress: resolved 245, reused 245, downloaded 0, added 14
+Progress: resolved 245, reused 245, downloaded 0, added 15
+Progress: resolved 245, reused 245, downloaded 0, added 16
+Progress: resolved 245, reused 245, downloaded 0, added 17
+Progress: resolved 245, reused 245, downloaded 0, added 18
+Progress: resolved 245, reused 245, downloaded 0, added 19
+Progress: resolved 245, reused 245, downloaded 0, added 20
+Progress: resolved 245, reused 245, downloaded 0, added 21
+Progress: resolved 245, reused 245, downloaded 0, added 22
+Progress: resolved 245, reused 245, downloaded 0, added 23
+Progress: resolved 245, reused 245, downloaded 0, added 24
+Progress: resolved 245, reused 245, downloaded 0, added 25
+Progress: resolved 245, reused 245, downloaded 0, added 26
+Progress: resolved 245, reused 245, downloaded 0, added 27
+Progress: resolved 245, reused 245, downloaded 0, added 28
+Progress: resolved 245, reused 245, downloaded 0, added 29
+✓ Lockfile passes supply-chain policies (verified 27m ago)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +245
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 245, reused 245, downloaded 0, added 1
+Progress: resolved 245, reused 245, downloaded 0, added 5
+Progress: resolved 245, reused 245, downloaded 0, added 9
+Progress: resolved 245, reused 245, downloaded 0, added 12
+Progress: resolved 245, reused 245, downloaded 0, added 13
+Progress: resolved 245, reused 245, downloaded 0, added 20
+Progress: resolved 245, reused 245, downloaded 0, added 21
+Progress: resolved 245, reused 245, downloaded 0, added 24
+Progress: resolved 245, reused 245, downloaded 0, added 28
+Progress: resolved 245, reused 245, downloaded 0, added 31
+Progress: resolved 245, reused 245, downloaded 0, added 36
+Progress: resolved 245, reused 245, downloaded 0, added 38

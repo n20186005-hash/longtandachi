@@ -4,6 +4,7 @@
   "description": "桃園龍潭大池的散步路線、吊橋夜景、交通停車與親子旅遊指南。",
   "lang": "zh-Hant-TW",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f6f4ec",
   "theme_color": "#123c4a",
@@ -11,7 +12,20 @@
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

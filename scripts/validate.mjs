@@ -1,7 +1,8 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = resolve(new URL('..', import.meta.url).pathname);
+const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const required = [
   'src/pages/index.astro',
   'src/pages/photo-credits.astro',
@@ -25,6 +26,9 @@ const allowedWebsiteHosts = new Set([
   'creativecommons.org',
   'schema.org',
   'longtandachi.com',
+  'maps.app.goo.gl',
+  'travel.tycg.gov.tw',
+  'www.longtan.tycg.gov.tw',
 ]);
 const errors = [];
 
@@ -61,7 +65,7 @@ async function collect(dir) {
 
 const files = await collect(root);
 const websiteFiles = files.filter((file) => {
-  const rel = relative(root, file);
+  const rel = relative(root, file).replaceAll('\\', '/');
   return rel.startsWith('src/') || ['public/site.webmanifest', 'public/robots.txt'].includes(rel);
 });
 let websiteText = '';

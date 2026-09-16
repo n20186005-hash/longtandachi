@@ -22,6 +22,10 @@
 6. 桃園觀光導覽網｜龍潭觀光大池周邊景點  
    https://travel.tycg.gov.tw/zh-tw/travel/nearby-attractions/332
 
+7. Google 地圖｜龍潭大池使用者評價（評分 4.3、10,576 則評價，同步時間 2026 年 9 月）  
+   https://maps.app.goo.gl/vLGKPGjG9sV4kkpA6  
+   說明：評分與評價數僅於頁面展示，不寫入 JSON-LD 結構化資料；版權歸原作者與 Google 地圖所有。
+
 ## 維護原則
 
 以下資訊應視為動態資料，不能只依賴本文件：

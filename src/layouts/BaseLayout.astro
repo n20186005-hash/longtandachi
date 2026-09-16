@@ -12,7 +12,7 @@ interface Props {
 }
 
 const {
-  title = '龍潭大池旅遊指南｜吊橋夜景、交通停車與散步路線',
+  title = '龍潭大池觀光指南｜交通導航、停車、夜景與觀光吊橋（桃園龍潭）',
   description = site.description,
   image = '/images/og-longtan-dachi.jpg',
   canonicalPath = Astro.url.pathname,
@@ -35,6 +35,7 @@ const socialImage = new URL(image, site.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/icon-1024.png" />
     <link rel="manifest" href="/site.webmanifest" />
     {noindex && <meta name="robots" content="noindex, follow" />}
 
@@ -82,6 +83,13 @@ const socialImage = new URL(image, site.url).toString();
         if (revealObserver) revealObserver.observe(node);
         else node.classList.add('is-visible');
       });
+    </script>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
     </script>
   </body>
 </html>

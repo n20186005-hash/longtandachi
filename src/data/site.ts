@@ -4,7 +4,7 @@ export const site = {
   domain: 'LongtanDachi.com',
   url: 'https://longtandachi.com',
   description:
-    '規劃桃園龍潭大池半日遊：整理吊橋夜景、南天宮、湖畔步道、交通停車、親子活動、水上體驗與周邊行程。',
+    '桃園龍潭大池攻略：一鍵 Google 地圖導航與地址、周邊停車與交通、觀光吊橋與南天宮夜景、散步路線與親子活動。Google 地圖 4.3 星。',
   address: '桃園市龍潭區上林里中豐路上林段115巷11號',
   coordinates: {
     latitude: 24.8635524,
@@ -12,7 +12,20 @@ export const site = {
   },
   mapsUrl:
     'https://www.google.com/maps/dir/?api=1&destination=24.8635524%2C121.2094495&destination_place_id=ChIJGWs7Pvs8aDQR85-UeY7fPWE',
+  mapsShareUrl: 'https://maps.app.goo.gl/vLGKPGjG9sV4kkpA6',
+  govtTourismUrl: 'https://travel.tycg.gov.tw/zh-tw/travel/attraction/332',
+  districtOfficeUrl: 'https://www.longtan.tycg.gov.tw/cp.aspx?n=6985',
+  nearbyLandmarks: ['南天宮', '石門水庫'],
   gaId: 'G-HXM22WWPKP',
+} as const;
+
+export const rating = {
+  value: 4.3,
+  count: '10,576',
+  countRaw: 10576,
+  syncDate: '2026 年 9 月',
+  sourceNote: '評分與評價數同步自 Google 地圖使用者評價，同步時間 2026 年 9 月；版權歸原作者與 Google 地圖所有。',
+  reviewsUrl: 'https://maps.app.goo.gl/vLGKPGjG9sV4kkpA6',
 } as const;
 
 export const quickFacts = [
@@ -117,6 +130,14 @@ export const faqs = [
   {
     question: '龍潭大池需要門票嗎？',
     answer: '湖畔公園、步道與吊橋等戶外公共空間免費參觀。天鵝船、SUP或其他營運型水上體驗可能另行收費，並依現場公告為準。',
+  },
+  {
+    question: '如何導航到龍潭大池？',
+    answer: '可直接以地址「桃園市龍潭區中豐路上林段115巷11號」設定導航，或以座標 24.8636, 121.2094 開啟 Google 地圖；本站交通區塊亦提供一鍵導航連結。大眾運輸可於龍潭市區轉乘公車，在「龍潭大池」或鄰近站點下車。',
+  },
+  {
+    question: '龍潭大池附近有停車場嗎？',
+    answer: '周邊有公有、民營停車空間與合法路邊停車格可供尋找；端午龍舟賽、煙火或市集期間車位會明顯更緊張。本站不固定推薦單一停車場與收費標準，出發當日請以現場公告與交通指示為準。',
   },
   {
     question: '龍潭大池適合安排多久？',

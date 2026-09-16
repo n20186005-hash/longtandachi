@@ -5,14 +5,15 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import ResponsiveImage from '../components/ResponsiveImage.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import { site, quickFacts, highlights, routes, visitorProfiles, faqs } from '../data/site';
+import { site, quickFacts, highlights, routes, visitorProfiles, faqs, rating } from '../data/site';
 
 const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'TouristAttraction',
+    '@id': `${site.url}/#attraction`,
     name: '龍潭觀光大池',
-    alternateName: ['龍潭大池', 'Longtan Tourist Pond'],
+    alternateName: ['龍潭大池', 'Longtan Tourist Pond', 'Longtan Dachi'],
     description: site.description,
     url: site.url,
     image: [
@@ -34,6 +35,8 @@ const structuredData = [
       latitude: site.coordinates.latitude,
       longitude: site.coordinates.longitude,
     },
+    hasMap: site.mapsShareUrl,
+    sameAs: [site.mapsShareUrl, site.govtTourismUrl],
     touristType: ['親子旅遊', '情侶約會', '文化旅遊', '攝影', '湖畔散步'],
   },
   {
@@ -79,12 +82,39 @@ const structuredData = [
           <p class="mb-4 text-sm font-bold tracking-[0.28em] text-gold-300">湖光・吊橋・百年陂塘</p>
           <h1 id="hero-title" class="font-serif text-[clamp(3.8rem,9vw,7.6rem)] leading-[0.9] font-semibold tracking-[0.04em] text-white drop-shadow-lg">
             龍潭大池
+            <span class="mt-4 block text-[clamp(0.95rem,2vw,1.35rem)] font-sans font-bold tracking-[0.4em] text-white/80">桃園市・龍潭區・臺灣</span>
           </h1>
           <p class="mt-5 max-w-2xl font-serif text-xl leading-9 text-white/90 md:text-2xl md:leading-10">
             從午後的湖光，走進吊橋亮起後的夜色。
           </p>
           <p class="mt-4 max-w-xl text-sm leading-7 text-white/70 md:text-base">
-            規劃散步路線、交通停車、親子活動與周邊半日遊，第一次來也能快速掌握重點。
+            龍潭大池（龍潭觀光大池）位於臺灣桃園市龍潭區，是龍潭最具代表性的湖畔地標，也是旅客造訪龍潭的主要起點。這裡整理一鍵導航與地址、交通與停車方式、吊橋夜景、散步路線、親子活動與周邊半日遊，第一次來也能快速掌握重點。
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span class="flex items-baseline gap-2">
+              <strong class="font-serif text-2xl font-semibold text-white">4.3</strong>
+              <span class="text-sm font-semibold text-white/85">／5</span>
+            </span>
+            <span class="relative inline-flex" aria-hidden="true">
+              <span class="flex gap-0.5 text-white/30">
+                {Array.from({ length: 5 }).map(() => <Icon name="star" class="size-4" />)}
+              </span>
+              <span class="absolute inset-0 flex gap-0.5 overflow-hidden text-gold-300" style={`width:${(rating.value / 5) * 100}%`}>
+                {Array.from({ length: 5 }).map(() => <Icon name="star" class="size-4 shrink-0" />)}
+              </span>
+            </span>
+            <span class="text-sm font-semibold text-white/85">{rating.count} 則評價</span>
+            <span class="sr-only">Google 地圖評分 4.3，滿分 5 分</span>
+          </div>
+          <p class="mt-2 text-xs leading-6 text-white/60">
+            評分與評價數同步自 Google 地圖（Google Maps）使用者評價 · 2026 年 9 月 ·
+            <a href={rating.reviewsUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-gold-300 underline decoration-gold-300/40 underline-offset-4 transition hover:text-white">點擊查看 Google 地圖全部評價↗</a>
+          </p>
+          <p class="mt-5 flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.1em] text-white/55">
+            <span>龍潭大池</span><span aria-hidden="true">→</span>
+            <span>龍潭區</span><span aria-hidden="true">→</span>
+            <span>桃園市</span><span aria-hidden="true">→</span>
+            <span>臺灣</span>
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a class="btn-primary bg-gold-300 text-lake-950 hover:bg-white" href="/#routes">
@@ -126,7 +156,7 @@ const structuredData = [
         <div>
           <SectionTitle
             eyebrow="第一次來，先看這裡"
-            title="不只是一座湖，而是龍潭地名的起點"
+            title="認識龍潭大池：不只是一座湖，更是龍潭地名的起點"
             description="早期的陂塘承擔蓄水與灌溉功能，後來逐步轉為居民散步、節慶與水上活動的公共空間。南天宮、吊橋與百年龍舟傳統，讓這裡同時擁有自然、信仰與地方生活的層次。"
           />
           <div class="mt-9 grid gap-4 sm:grid-cols-2" data-reveal>
@@ -165,8 +195,8 @@ const structuredData = [
       <div class="shell">
         <SectionTitle
           eyebrow="景點亮點"
-          title="沿著水岸，依序遇見龍潭的代表風景"
-          description="不需要追趕行程。從吊橋、南天宮到木棧步道，主要看點都能以舒服的步行節奏串起。"
+          title="龍潭大池景點亮點：沿著水岸，從白天走到夜景"
+          description="不需要追趕行程。從吊橋、南天宮到木棧步道，主要看點都能以舒服的步行節奏串起；入夜後的橋燈與湖面倒影，同樣值得多留一會。"
         />
 
         <div class="mt-16 grid gap-20 md:mt-24 md:gap-28">
@@ -294,7 +324,7 @@ const structuredData = [
       <div class="shell">
         <SectionTitle
           eyebrow="交通與停車"
-          title="先找到正確入口，抵達後就能輕鬆開始"
+          title="龍潭大池位置、導航與交通：先找到正確入口，抵達後就能輕鬆開始"
           description="大池周邊入口與停車位置會受到活動、交通管制與現場狀況影響。本站提供穩定的到達方向，不承諾單一停車位一定可用。"
         />
 
@@ -361,8 +391,8 @@ const structuredData = [
       <div class="shell">
         <SectionTitle
           eyebrow="周邊行程"
-          title="把大池放進半日遊，龍潭會更完整"
-          description="大池周邊的人文景點距離不遠；有車的話，再接三坑老街、客家茶文化館或石門水庫，就能形成自然與地方文化兼具的一日行程。"
+          title="龍潭大池周邊景點：把大池放進半日遊，龍潭會更完整"
+          description={`大池周邊的人文景點距離不遠；造訪龍潭大池時，可輕鬆串連周邊核心地標${site.nearbyLandmarks.join('與')}，再接三坑老街、客家茶文化館，就能形成自然與地方文化兼具的一日行程。`}
         />
 
         <div class="mt-14 grid gap-6 md:grid-cols-3">
@@ -462,6 +492,88 @@ const structuredData = [
       </div>
     </section>
 
+    <section class="py-24 md:py-32" id="reviews">
+      <div class="shell">
+        <div class="overflow-hidden rounded-[2.5rem] border border-lake-900/8 bg-white shadow-soft" data-reveal>
+          <div class="grid gap-10 p-8 md:p-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-14 lg:p-14">
+            <div>
+              <p class="eyebrow"><span class="h-px w-8 bg-gold-500"></span>遊客評價</p>
+              <h2 class="section-title">Google 地圖上的龍潭大池評價</h2>
+              <p class="section-lead">本區僅展示同步自 Google 地圖的整體評分與評價數，不轉載個別評論內容；實際評價內容請前往 Google 地圖查看。</p>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <p class="font-serif text-6xl font-semibold leading-none text-lake-950">{rating.value}</p>
+                <div>
+                  <div class="relative inline-flex" aria-hidden="true">
+                    <span class="flex gap-1 text-lake-100">
+                      {Array.from({ length: 5 }).map(() => <Icon name="star" class="size-6" />)}
+                    </span>
+                    <span class="absolute inset-0 flex gap-1 overflow-hidden text-gold-500" style={`width:${(rating.value / 5) * 100}%`}>
+                      {Array.from({ length: 5 }).map(() => <Icon name="star" class="size-6 shrink-0" />)}
+                    </span>
+                  </div>
+                  <p class="mt-2 text-sm font-bold text-lake-950">{rating.count} 則 Google 地圖評價</p>
+                  <p class="sr-only">Google 地圖評分 {rating.value}，滿分 5 分，共 {rating.countRaw} 則評價</p>
+                </div>
+              </div>
+              <p class="mt-6 text-xs leading-6 text-ink-700">{rating.sourceNote}</p>
+              <a
+                href={rating.reviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary mt-7"
+              >
+                在 Google 地圖查看全部評價 <Icon name="external" class="size-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-mist-100 py-24 md:py-32" id="sources">
+      <div class="shell">
+        <SectionTitle
+          eyebrow="資料來源"
+          title="本站資料來源與更新說明"
+          description="為了提供可查核的旅遊資訊，本站內容參考以下官方與公開來源整理撰寫。動態資訊（活動、班次、營運狀態）請以現場與官方最新公告為準。"
+        />
+
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <article class="soft-card flex flex-col p-7" data-reveal>
+            <span class="grid size-12 place-items-center rounded-2xl bg-lake-100 text-lake-800"><Icon name="map-pin" class="size-6" /></span>
+            <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">官方旅遊資訊</h3>
+            <p class="mt-3 flex-1 text-sm leading-7 text-ink-700">桃園觀光導覽網｜龍潭觀光大池，景點介紹與官方公告之主要依據。</p>
+            <a href={site.govtTourismUrl} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-lake-700 transition hover:text-temple-600">前往桃園觀光導覽網 <Icon name="external" class="size-4" /></a>
+          </article>
+          <article class="soft-card flex flex-col p-7" data-reveal>
+            <span class="grid size-12 place-items-center rounded-2xl bg-temple-100 text-temple-700"><Icon name="info" class="size-6" /></span>
+            <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">在地機關</h3>
+            <p class="mt-3 flex-1 text-sm leading-7 text-ink-700">桃園市龍潭區公所｜龍潭簡介，在地歷史與地方建設資訊參考。</p>
+            <a href={site.districtOfficeUrl} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-lake-700 transition hover:text-temple-600">前往龍潭區公所 <Icon name="external" class="size-4" /></a>
+          </article>
+          <article class="soft-card flex flex-col p-7" data-reveal>
+            <span class="grid size-12 place-items-center rounded-2xl bg-gold-300/35 text-[#805611]"><Icon name="star" class="size-6" /></span>
+            <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">評價</h3>
+            <p class="mt-3 flex-1 text-sm leading-7 text-ink-700">{rating.sourceNote}</p>
+            <a href={rating.reviewsUrl} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-lake-700 transition hover:text-temple-600">在 Google 地圖查看全部評價 <Icon name="external" class="size-4" /></a>
+          </article>
+          <article class="soft-card flex flex-col p-7" data-reveal>
+            <span class="grid size-12 place-items-center rounded-2xl bg-lake-50 text-lake-800"><Icon name="camera" class="size-6" /></span>
+            <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">照片授權</h3>
+            <p class="mt-3 flex-1 text-sm leading-7 text-ink-700">本站照片皆為真實拍攝，來源、作者與 Creative Commons 授權詳見授權頁。</p>
+            <a href="/photo-credits/" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-lake-700 transition hover:text-temple-600">查看照片授權 <Icon name="arrow" class="size-4" /></a>
+          </article>
+        </div>
+
+        <p class="mt-10 max-w-3xl text-sm leading-7 text-ink-700">
+          若需最新官方公告與桃園地區旅遊資訊，可前往
+          <a href={site.govtTourismUrl} target="_blank" rel="noopener noreferrer" class="font-bold text-lake-700 underline decoration-lake-700/30 underline-offset-4 hover:text-temple-600">桃園市政府觀光旅遊局官方旅遊入口</a>。
+        </p>
+      </div>
+    </section>
+
     <section class="relative overflow-hidden py-24 md:py-32">
       <div class="absolute inset-0">
         <ResponsiveImage
@@ -485,9 +597,15 @@ const structuredData = [
 
   <Footer />
 
-  <div class="fixed right-4 bottom-4 z-40 md:hidden">
-    <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" class="flex min-h-12 items-center gap-2 rounded-full bg-gold-300 px-5 py-3 text-sm font-bold text-lake-950 shadow-xl shadow-lake-950/25">
-      <Icon name="map-pin" class="size-4" /> 地圖導航
+  <div class="fixed inset-x-4 bottom-4 z-40 flex items-center gap-2 md:hidden">
+    <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" class="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-gold-300 px-4 py-3 text-sm font-bold text-lake-950 shadow-xl shadow-lake-950/25">
+      <Icon name="map-pin" class="size-4" /> 一鍵導航
+    </a>
+    <a href="/#transport" class="flex min-h-12 items-center justify-center gap-2 rounded-full border border-lake-900/10 bg-white px-4 py-3 text-sm font-bold text-lake-950 shadow-lg shadow-lake-950/10">
+      <Icon name="car" class="size-4" /> 停車
+    </a>
+    <a href="/#highlights" class="flex min-h-12 items-center justify-center gap-2 rounded-full border border-lake-900/10 bg-white px-4 py-3 text-sm font-bold text-lake-950 shadow-lg shadow-lake-950/10">
+      <Icon name="sunset" class="size-4" /> 夜景
     </a>
   </div>
 
