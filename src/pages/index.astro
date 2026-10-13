@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import ResponsiveImage from '../components/ResponsiveImage.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import { site, quickFacts, highlights, routes, visitorProfiles, faqs, rating } from '../data/site';
+import { site, quickFacts, highlights, routes, visitorProfiles, faqs, rating, waterPlayNotice, topicPages } from '../data/site';
 
 const structuredData = [
   {
@@ -54,7 +54,11 @@ const structuredData = [
 ];
 ---
 
-<BaseLayout structuredData={structuredData}>
+<BaseLayout
+  title="龍潭大池攻略｜桃園龍潭景點、停車導航、吊橋夜景與親子玩法"
+  description={site.description}
+  structuredData={structuredData}
+>
   <Header />
 
   <main>
@@ -107,7 +111,7 @@ const structuredData = [
             <span class="sr-only">Google 地圖評分 4.3，滿分 5 分</span>
           </div>
           <p class="mt-2 text-xs leading-6 text-white/60">
-            評分與評價數同步自 Google 地圖（Google Maps）使用者評價 · 2026 年 9 月 ·
+            評分與評價數同步自 Google 地圖（Google Maps）使用者評價 · 2026 年 10 月 ·
             <a href={rating.reviewsUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-gold-300 underline decoration-gold-300/40 underline-offset-4 transition hover:text-white">點擊查看 Google 地圖全部評價↗</a>
           </p>
           <p class="mt-5 flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.1em] text-white/55">
@@ -147,6 +151,20 @@ const structuredData = [
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-gold-500/25 bg-gold-300/12 py-10 md:py-14" id="water-notice" aria-labelledby="water-notice-title">
+      <div class="shell">
+        <div class="flex flex-col gap-6 rounded-[2rem] border border-gold-500/35 bg-white p-7 shadow-soft md:flex-row md:items-center md:gap-8 md:p-9">
+          <div class="grid size-14 shrink-0 place-items-center rounded-2xl bg-temple-700 text-white"><Icon name="info" class="size-7" /></div>
+          <div class="flex-1">
+            <p class="text-xs font-bold tracking-[0.18em] text-temple-700">最新公告｜{waterPlayNotice.updated}</p>
+            <h2 id="water-notice-title" class="mt-2 font-serif text-2xl font-semibold text-lake-950 md:text-3xl">{waterPlayNotice.title}</h2>
+            <p class="mt-3 text-sm leading-7 text-ink-700 md:text-base">{waterPlayNotice.text}</p>
+          </div>
+          <a href={waterPlayNotice.url} target="_blank" rel="noopener noreferrer" class="btn-primary shrink-0 bg-temple-700 text-white hover:bg-temple-600">查看{waterPlayNotice.source}公告 <Icon name="external" class="size-4" /></a>
         </div>
       </div>
     </section>
@@ -437,6 +455,35 @@ const structuredData = [
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32" id="topics">
+      <div class="shell">
+        <SectionTitle
+          eyebrow="專題頁面"
+          title="把龍潭大池放進完整的龍潭行程"
+          description="除了大池本身，我們整理了停車交通、夜景、親子與周邊景點的專屬頁面，幫你一次規劃。"
+        />
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {topicPages.map((page) => (
+            <a href={`/${page.slug}/`} class="soft-card group overflow-hidden transition hover:-translate-y-1 hover:shadow-soft" data-reveal>
+              <div class="overflow-hidden">
+                <ResponsiveImage
+                  name={page.image}
+                  alt={page.label}
+                  class="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  sizes="(min-width: 1024px) 25vw, 100vw"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl font-semibold text-lake-950">{page.label}</h3>
+                <p class="mt-2 text-sm leading-7 text-ink-700">{page.summary}</p>
+                <span class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-lake-700">查看頁面 <Icon name="arrow" class="size-4 transition group-hover:translate-x-1" /></span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

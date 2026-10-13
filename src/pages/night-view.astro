@@ -1,0 +1,152 @@
+---
+import SubpageLayout from '../layouts/SubpageLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Icon from '../components/Icon.astro';
+import { site, nightFaqs } from '../data/site';
+
+const slug = 'night-view';
+const canonicalPath = `/${slug}/`;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '龍潭大池', item: site.url },
+      { '@type': 'ListItem', position: 2, name: '吊橋夜景', item: `${site.url}/night-view/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: nightFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+];
+---
+
+<SubpageLayout
+  title="龍潭大池夜景｜吊橋亮燈、南天宮倒影與藍調時刻拍攝"
+  description="龍潭大池夜景怎麼拍？整理觀光吊橋與南天宮亮燈、湖面倒影、九曲橋與藍調時刻的最佳抵達時間、拍攝點與注意事項。"
+  canonicalPath={canonicalPath}
+  structuredData={structuredData}
+  eyebrow="吊橋夜景"
+  heroTitle="龍潭大池夜景"
+  heroLead="入夜後，觀光吊橋與南天宮的燈光映進湖面，是龍潭大池最安靜也最上鏡的時刻。這裡整理亮燈、拍攝點與藍調時刻的安排方式。"
+  heroImage="longtan-night"
+  currentSlug={slug}
+>
+  <section class="py-20 md:py-28" id="highlights">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="夜景亮點"
+        title="入夜後，大池換上另一種表情"
+        description="不需要趕行程。吊橋、南天宮與九曲橋的燈光，讓同一座池子在夜裡呈現與白天完全不同的層次。"
+      />
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <article class="soft-card p-7" data-reveal>
+          <span class="grid size-12 place-items-center rounded-2xl bg-lake-100 text-lake-800"><Icon name="sparkle" class="size-6" /></span>
+          <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">觀光吊橋燈光</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">複合式吊橋在夜間打出線條光，與白天清爽的結構感完全不同，是夜景的主角。</p>
+        </article>
+        <article class="soft-card p-7" data-reveal>
+          <span class="grid size-12 place-items-center rounded-2xl bg-temple-100 text-temple-700"><Icon name="star" class="size-6" /></span>
+          <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">南天宮倒影</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">廟宇屋脊與湖面倒影在燈光下相互呼應，是龍潭最具辨識度的夜間畫面。</p>
+        </article>
+        <article class="soft-card p-7" data-reveal>
+          <span class="grid size-12 place-items-center rounded-2xl bg-gold-300/35 text-[#805611]"><Icon name="sunset" class="size-6" /></span>
+          <h3 class="mt-5 font-serif text-xl font-semibold text-lake-950">九曲橋與藍調</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">天色轉藍的短暫時刻，橋燈與餘光同時在場，層次最豐富，也最適合慢拍。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="timing">
+    <div class="shell grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+      <div class="relative" data-reveal>
+        <div class="overflow-hidden rounded-[2.5rem] shadow-soft">
+          <img src="/images/longtan-night-1280.webp" alt="夜間龍潭南天宮、觀光吊橋與湖面彩色倒影" class="aspect-[4/3] w-full object-cover" width="1280" height="720" loading="lazy" decoding="async" />
+        </div>
+        <div class="absolute -bottom-7 -left-2 max-w-[17rem] rounded-[1.5rem] border border-white/70 bg-mist-50/95 p-5 shadow-card backdrop-blur md:-left-8">
+          <p class="text-xs font-bold tracking-[0.18em] text-temple-600">BEST TIME</p>
+          <p class="mt-2 font-serif text-xl font-semibold text-lake-950">下午 4 點半後抵達</p>
+          <p class="mt-2 text-xs leading-6 text-ink-700">一次看見日光、夕色與夜間倒影，也能避開夏季最炎熱的時段。</p>
+        </div>
+      </div>
+      <div>
+        <SectionTitle
+          eyebrow="時間安排"
+          title="什麼時候去，夜景最好看？"
+          description="建議下午四點半後抵達，先看日光下的湖景，再等天色轉藍與橋燈亮起。藍調時刻通常只有一段，提早找好位置比較從容。"
+        />
+        <div class="mt-9 grid gap-4 sm:grid-cols-2" data-reveal>
+          <div class="soft-card p-6">
+            <p class="font-serif text-3xl font-semibold text-lake-700">16:30</p>
+            <p class="mt-2 text-sm font-bold text-lake-950">抵達與散步</p>
+            <p class="mt-2 text-sm leading-6 text-ink-700">先沿湖畔慢走，熟悉光線與拍攝角度。</p>
+          </div>
+          <div class="soft-card p-6">
+            <p class="font-serif text-3xl font-semibold text-temple-600">藍調</p>
+            <p class="mt-2 text-sm font-bold text-lake-950">拍倒影</p>
+            <p class="mt-2 text-sm leading-6 text-ink-700">天色轉藍、橋燈初亮，是層次最多的時刻。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28" id="spots">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="拍攝建議"
+        title="幾個好取景的位置"
+        description="以下位置僅供構圖參考，實際視線與開放範圍會受現場狀況影響；拍攝時請保留通行空間，不阻礙其他遊客。"
+      />
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <h3 class="font-serif text-2xl font-semibold text-lake-950">西岸看全景</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">從西岸方向可收進南天宮與吊橋全景，湖面平靜時能拍到完整倒影，適合廣角。</p>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <h3 class="font-serif text-2xl font-semibold text-lake-950">木棧道與對岸</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">湖畔木棧與南天宮對岸能拍到水面線條與燈光層次，中焦段很好發揮。</p>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <h3 class="font-serif text-2xl font-semibold text-lake-950">裝備與禮儀</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">可帶腳架穩定長曝光，但請避免在橋面中央長時間架設；夜間注意保留高光細節。</p>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <h3 class="font-serif text-2xl font-semibold text-lake-950">防蚊與安全</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">水岸與草叢傍晚蚊蟲較多，建議備防蚊；夜間步行留意濕滑與階梯。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="faq">
+    <div class="shell grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <div>
+        <SectionTitle
+          eyebrow="常見問題"
+          title="關於夜景，先回答這幾件小事"
+          description="亮燈與開放細節可能隨季節、維護調整，因此本站避免把不穩定的時刻寫成永久規則。"
+        />
+      </div>
+      <div class="grid gap-3" data-reveal>
+        {nightFaqs.map((faq, index) => (
+          <details class="group rounded-2xl border border-lake-900/8 bg-white px-6 py-1 shadow-sm" open={index === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-bold text-lake-950 marker:hidden">
+              <span>{faq.question}</span>
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-lake-50 text-lake-800 transition group-open:rotate-180"><Icon name="chevron" class="size-4" /></span>
+            </summary>
+            <p class="border-t border-lake-900/8 pb-6 pt-4 text-sm leading-7 text-ink-700">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</SubpageLayout>

@@ -1,0 +1,152 @@
+---
+import SubpageLayout from '../layouts/SubpageLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Icon from '../components/Icon.astro';
+import { site, waterPlayNotice, familyFaqs } from '../data/site';
+
+const slug = 'family-guide';
+const canonicalPath = `/${slug}/`;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '龍潭大池', item: site.url },
+      { '@type': 'ListItem', position: 2, name: '親子遊玩', item: `${site.url}/family-guide/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: familyFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+];
+---
+
+<SubpageLayout
+  title="龍潭大池親子遊｜路線、遊戲空間與戲水區最新公告"
+  description="帶孩子去龍潭大池怎麼玩？整理親子路線、遊戲與散步空間、推車友善動線，以及戲水區最新暫停開放公告與臨水安全提醒。"
+  canonicalPath={canonicalPath}
+  structuredData={structuredData}
+  eyebrow="親子遊玩"
+  heroTitle="龍潭大池親子遊"
+  heroLead="寬敞的湖畔、平緩的步道與湖中廟宇，讓龍潭大池成為適合帶孩子放慢節奏的地方。這裡整理路線、設施與最新的戲水區公告。"
+  heroImage="longtan-golden-hour"
+  currentSlug={slug}
+>
+  <section class="py-20 md:py-28" id="notice">
+    <div class="shell">
+      <div class="flex flex-col gap-6 rounded-[2rem] border border-gold-500/35 bg-gold-300/15 p-7 shadow-soft md:flex-row md:items-center md:gap-8 md:p-9" data-reveal>
+        <div class="grid size-14 shrink-0 place-items-center rounded-2xl bg-temple-700 text-white"><Icon name="info" class="size-7" /></div>
+        <div class="flex-1">
+          <p class="text-xs font-bold tracking-[0.18em] text-temple-700">最新公告｜{waterPlayNotice.updated}</p>
+          <h2 class="mt-2 font-serif text-2xl font-semibold text-lake-950 md:text-3xl">{waterPlayNotice.title}</h2>
+          <p class="mt-3 text-sm leading-7 text-ink-700 md:text-base">{waterPlayNotice.text}</p>
+        </div>
+        <a href={waterPlayNotice.url} target="_blank" rel="noopener noreferrer" class="btn-primary shrink-0 bg-temple-700 text-white hover:bg-temple-600">查看{waterPlayNotice.source}公告 <Icon name="external" class="size-4" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="route">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="親子路線"
+        title="一條適合孩子的輕鬆動線"
+        description="重點不是走完，而是讓孩子有休息、看水與活動的節奏。下方路線以平緩、少折返為原則。"
+      />
+      <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        <article class="soft-card p-7" data-reveal>
+          <span class="text-xs font-bold tracking-[0.16em] text-temple-600">STEP 1</span>
+          <h3 class="mt-3 font-serif text-2xl font-semibold text-lake-950">水岸廣場集合</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">從水岸休憩廣場出發，空間開闊，適合上學年齡的孩子先活動一下。</p>
+        </article>
+        <article class="soft-card p-7" data-reveal>
+          <span class="text-xs font-bold tracking-[0.16em] text-lake-700">STEP 2</span>
+          <h3 class="mt-3 font-serif text-2xl font-semibold text-lake-950">吊橋與南天宮</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">走觀光吊橋、遠看南天宮，路線平緩；請牽好幼童，勿在橋面奔跑。</p>
+        </article>
+        <article class="soft-card p-7" data-reveal>
+          <span class="text-xs font-bold tracking-[0.16em] text-gold-500">STEP 3</span>
+          <h3 class="mt-3 font-serif text-2xl font-semibold text-lake-950">湖畔步道休息</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-700">沿木棧道散步後回到廣場休息、補水，不把行程排得太滿。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28" id="facilities">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="設施與動線"
+        title="帶孩子也要注意這幾件事"
+        description="以下以一般開放狀況整理；設施與開放範圍可能因天候、維護或活動調整，出發前請以現場公告為準。"
+      />
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <div class="flex gap-5">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-lake-100 text-lake-800"><Icon name="family" class="size-6" /></span>
+            <div>
+              <h3 class="font-serif text-2xl font-semibold text-lake-950">推車友善</h3>
+              <p class="mt-3 text-sm leading-7 text-ink-700">主要水岸路線整體平緩，吊橋入口經過友善坡度改善，適合輕鬆步行與推車；臨水、木棧或人潮密集路段仍需放慢速度。</p>
+            </div>
+          </div>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <div class="flex gap-5">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-temple-100 text-temple-700"><Icon name="sunset" class="size-6" /></span>
+            <div>
+              <h3 class="font-serif text-2xl font-semibold text-lake-950">遊戲與散步空間</h3>
+              <p class="mt-3 text-sm leading-7 text-ink-700">水岸廣場與湖畔綠地適合孩子放電；夏季正午遮蔭有限，建議避開高溫時段並自備防曬與飲水。</p>
+            </div>
+          </div>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <div class="flex gap-5">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-gold-300/35 text-[#805611]"><Icon name="info" class="size-6" /></span>
+            <div>
+              <h3 class="font-serif text-2xl font-semibold text-lake-950">臨水安全</h3>
+              <p class="mt-3 text-sm leading-7 text-ink-700">池邊步道臨水，請全程牽好幼童；雨後橋面與木棧道可能較滑，穿著止滑鞋較安心。</p>
+            </div>
+          </div>
+        </article>
+        <article class="soft-card p-7 md:p-8" data-reveal>
+          <div class="flex gap-5">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-lake-100 text-lake-800"><Icon name="map-pin" class="size-6" /></span>
+            <div>
+              <h3 class="font-serif text-2xl font-semibold text-lake-950">水上活動</h3>
+              <p class="mt-3 text-sm leading-7 text-ink-700">天鵝船、SUP 等設施會受天候、水位與業者營運影響；專程前往前請確認當日現場資訊，並留意戲水區最新公告。</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="faq">
+    <div class="shell grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <div>
+        <SectionTitle
+          eyebrow="常見問題"
+          title="帶孩子去，先回答這幾件小事"
+          description="資訊可能隨活動與維護調整，因此本站避免把不穩定的營業時刻寫成永久規則。"
+        />
+      </div>
+      <div class="grid gap-3" data-reveal>
+        {familyFaqs.map((faq, index) => (
+          <details class="group rounded-2xl border border-lake-900/8 bg-white px-6 py-1 shadow-sm" open={index === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-bold text-lake-950 marker:hidden">
+              <span>{faq.question}</span>
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-lake-50 text-lake-800 transition group-open:rotate-180"><Icon name="chevron" class="size-4" /></span>
+            </summary>
+            <p class="border-t border-lake-900/8 pb-6 pt-4 text-sm leading-7 text-ink-700">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</SubpageLayout>

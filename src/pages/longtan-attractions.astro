@@ -1,0 +1,178 @@
+---
+import SubpageLayout from '../layouts/SubpageLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Icon from '../components/Icon.astro';
+import { site, attractions, attractionFaqs } from '../data/site';
+
+const slug = 'longtan-attractions';
+const canonicalPath = `/${slug}/`;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '龍潭大池', item: site.url },
+      { '@type': 'ListItem', position: 2, name: '龍潭景點推薦', item: `${site.url}/longtan-attractions/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: attractionFaqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+];
+---
+
+<SubpageLayout
+  title="龍潭景點推薦｜大池、老街、客家文化與周邊一日遊"
+  description="龍潭除了龍潭大池，還有菱潭街興創基地、龍潭聖蹟亭、鍾肇政文學生活園區、三坑老街與石門水庫。比較各景點特色、適合族群與交通，規劃你的龍潭行程。"
+  canonicalPath={canonicalPath}
+  structuredData={structuredData}
+  eyebrow="龍潭景點"
+  heroTitle="龍潭景點推薦"
+  heroLead="龍潭不只有大池。從湖畔吊橋走到客家老街與文學展館，這份比較幫你依照時間與同行者，挑出最適合的龍潭行程。"
+  heroImage="longtan-boardwalk"
+  currentSlug={slug}
+>
+  <section class="py-20 md:py-28" id="intro">
+    <div class="shell grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      <div>
+        <SectionTitle
+          eyebrow="為什麼需要這一頁"
+          title="把龍潭大池放進更完整的龍潭行程"
+          description="龍潭位於桃園南端，是以陂塘、客家文化與湖畔風景聞名的城鎮。若只安排龍潭大池，往往會錯過周邊更具人文厚度的景點；這裡把幾個主要去處整理成可比較的清單。"
+        />
+        <div class="mt-9 grid gap-4 sm:grid-cols-2" data-reveal>
+          <div class="soft-card p-6">
+            <p class="font-serif text-3xl font-semibold text-lake-700">市區</p>
+            <p class="mt-2 text-sm font-bold text-lake-950">步行可串連</p>
+            <p class="mt-2 text-sm leading-6 text-ink-700">大池、菱潭街、聖蹟亭、鍾肇政園區與龍元宮都在龍潭市區內。</p>
+          </div>
+          <div class="soft-card p-6">
+            <p class="font-serif text-3xl font-semibold text-temple-600">一日</p>
+            <p class="mt-2 text-sm font-bold text-lake-950">往外延伸</p>
+            <p class="mt-2 text-sm leading-6 text-ink-700">三坑老街、客家茶文化館與石門水庫適合自駕一日遊。</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative" data-reveal>
+        <div class="overflow-hidden rounded-[2.5rem] shadow-soft">
+          <img src="/images/longtan-boardwalk.jpg" alt="龍潭大池湖面上的木棧步道與綠樹" class="aspect-[4/3] w-full object-cover" width="1280" height="640" loading="lazy" decoding="async" />
+        </div>
+        <div class="absolute -bottom-7 -left-2 max-w-[17rem] rounded-[1.5rem] border border-white/70 bg-mist-50/95 p-5 shadow-card backdrop-blur md:-left-8">
+          <p class="text-xs font-bold tracking-[0.18em] text-temple-600">PLAN BY MOOD</p>
+          <p class="mt-2 font-serif text-xl font-semibold text-lake-950">先決定心情，再選景點</p>
+          <p class="mt-2 text-xs leading-6 text-ink-700">想散步、想拍照、想帶孩子，適合的組合都不一樣。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="list">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="景點比較"
+        title="龍潭主要景點一覽"
+        description="以下依「特色、適合族群、交通與建議行程」整理。各場域的開放時間與收費可能調整，出發前請以官方與現場公告為準。"
+      />
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        {attractions.map((item) => (
+          <article class="soft-card p-7 md:p-8" data-reveal>
+            <div class="flex items-center justify-between gap-3">
+              <span class="rounded-full bg-lake-50 px-3 py-1 text-xs font-bold text-lake-800">{item.tag}</span>
+              <span class="text-xs font-bold text-ink-700">建議 {item.plan}</span>
+            </div>
+            <h3 class="mt-5 font-serif text-2xl font-semibold text-lake-950">{item.name}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-700">{item.text}</p>
+            <div class="mt-6 grid gap-4 border-t border-lake-900/8 pt-5 sm:grid-cols-2">
+              <div>
+                <p class="text-xs font-bold tracking-[0.14em] text-temple-600">適合族群</p>
+                <div class="mt-2 flex flex-wrap gap-1.5">
+                  {item.bestFor.map((tag) => <span class="rounded-full bg-gold-300/20 px-2.5 py-1 text-[0.68rem] font-bold text-[#805611]">{tag}</span>)}
+                </div>
+              </div>
+              <div>
+                <p class="text-xs font-bold tracking-[0.14em] text-temple-600">交通方式</p>
+                <p class="mt-2 text-sm leading-6 text-lake-950">{item.transport}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28" id="plans">
+    <div class="shell">
+      <SectionTitle
+        eyebrow="行程組合"
+        title="兩種好排的龍潭路線"
+        description="不想自己拼行程，可以直接參考這兩組組合：一組集中在市區、輕鬆半日；一組往客家庄與水庫延伸，適合自駕一日。"
+        align="center"
+      />
+      <div class="mt-14 grid gap-6 lg:grid-cols-2">
+        <article class="overflow-hidden rounded-[2rem] border border-lake-900/8 bg-white shadow-card" data-reveal>
+          <div class="h-2 bg-lake-700"></div>
+          <div class="p-7 md:p-9">
+            <span class="text-xs font-bold tracking-[0.16em] text-lake-700">CITY WALK</span>
+            <h3 class="mt-3 font-serif text-3xl font-semibold text-lake-950">市區文化半日</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-700">適合不想頻繁移動、以步行與慢遊為主的旅程。</p>
+            <ol class="mt-7 grid gap-0">
+              {['龍潭大池（吊橋、南天宮、步道）', '菱潭街興創基地', '龍潭聖蹟亭', '鍾肇政文學生活園區', '龍元宮商圈晚餐'].map((stop, index) => (
+                <li class="relative flex gap-4 pb-5 last:pb-0">
+                  {index !== 4 && <span class="absolute top-6 bottom-0 left-[0.7rem] w-px bg-lake-900/14"></span>}
+                  <span class="relative mt-1 grid size-6 shrink-0 place-items-center rounded-full border-4 border-white bg-lake-800 text-[0.58rem] font-bold text-white shadow-sm">{index + 1}</span>
+                  <span class="text-sm font-semibold text-lake-950">{stop}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </article>
+        <article class="overflow-hidden rounded-[2rem] border border-lake-900/8 bg-white shadow-card" data-reveal>
+          <div class="h-2 bg-gold-500"></div>
+          <div class="p-7 md:p-9">
+            <span class="text-xs font-bold tracking-[0.16em] text-[#9a6a18]">DAY TRIP</span>
+            <h3 class="mt-3 font-serif text-3xl font-semibold text-lake-950">客庄與水庫一日</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-700">從陂塘、老街到茶文化，理解龍潭不只是一個拍照景點。</p>
+            <ol class="mt-7 grid gap-0">
+              {['龍潭大池晨間散步', '臺灣客家茶文化館', '三坑老街午餐與拍照', '石門水庫環湖或壩區', '返回龍潭市區晚餐'].map((stop, index) => (
+                <li class="relative flex gap-4 pb-5 last:pb-0">
+                  {index !== 4 && <span class="absolute top-6 bottom-0 left-[0.7rem] w-px bg-lake-900/14"></span>}
+                  <span class="relative mt-1 grid size-6 shrink-0 place-items-center rounded-full border-4 border-white bg-gold-500 text-[0.58rem] font-bold text-white shadow-sm">{index + 1}</span>
+                  <span class="text-sm font-semibold text-lake-950">{stop}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-20 md:py-28" id="faq">
+    <div class="shell grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <div>
+        <SectionTitle
+          eyebrow="常見問題"
+          title="關於龍潭景點，先回答這幾件小事"
+          description="資訊可能隨活動與維護調整，因此本站避免把不穩定的營業時刻寫成永久規則。"
+        />
+      </div>
+      <div class="grid gap-3" data-reveal>
+        {attractionFaqs.map((faq, index) => (
+          <details class="group rounded-2xl border border-lake-900/8 bg-white px-6 py-1 shadow-sm" open={index === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-bold text-lake-950 marker:hidden">
+              <span>{faq.question}</span>
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-lake-50 text-lake-800 transition group-open:rotate-180"><Icon name="chevron" class="size-4" /></span>
+            </summary>
+            <p class="border-t border-lake-900/8 pb-6 pt-4 text-sm leading-7 text-ink-700">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</SubpageLayout>

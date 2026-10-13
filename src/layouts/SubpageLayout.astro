@@ -1,0 +1,80 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+import { topicPages } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  eyebrow: string;
+  heroTitle: string;
+  heroLead: string;
+  heroImage: 'longtan-night' | 'longtan-blue-hour' | 'longtan-golden-hour' | 'longtan-nantian-temple' | 'longtan-boardwalk';
+  currentSlug: string;
+}
+
+const { title, description, canonicalPath, structuredData, eyebrow, heroTitle, heroLead, heroImage, currentSlug } = Astro.props;
+const related = topicPages.filter((page) => page.slug !== currentSlug);
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} structuredData={structuredData}>
+  <Header />
+  <main>
+    <section class="relative min-h-[560px] overflow-hidden bg-lake-950 pt-[4.5rem] text-white md:min-h-[620px]" aria-labelledby="subpage-title">
+      <div class="absolute inset-0 top-[4.5rem]">
+        <ResponsiveImage
+          name={heroImage}
+          alt={heroTitle}
+          class="h-full w-full object-cover opacity-80"
+          loading="eager"
+          fetchpriority="high"
+          sizes="100vw"
+        />
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,28,34,.88)_0%,rgba(7,28,34,.6)_45%,rgba(7,28,34,.2)_78%),linear-gradient(0deg,rgba(7,28,34,.8)_0%,transparent_50%)]"></div>
+      </div>
+      <div class="shell relative z-10 flex min-h-[488px] items-end pb-14 md:min-h-[548px]">
+        <div class="max-w-3xl" data-reveal>
+          <p class="mb-4 text-sm font-bold tracking-[0.28em] text-gold-300">{eyebrow}</p>
+          <h1 id="subpage-title" class="font-serif text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.08] font-semibold text-white drop-shadow-lg">{heroTitle}</h1>
+          <p class="mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">{heroLead}</p>
+          <a href="/#transport" class="btn-primary mt-8 bg-gold-300 text-lake-950 hover:bg-white"><Icon name="map-pin" class="size-4" /> 交通與停車</a>
+        </div>
+      </div>
+    </section>
+
+    <slot />
+
+    <section class="bg-mist-100 py-20 md:py-28" aria-labelledby="related-title">
+      <div class="shell">
+        <p class="eyebrow"><span class="h-px w-8 bg-gold-500"></span>相關主題</p>
+        <h2 id="related-title" class="section-title">繼續規劃你的龍潭行程</h2>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {related.map((page) => (
+            <a href={`/${page.slug}/`} class="soft-card group overflow-hidden transition hover:-translate-y-1 hover:shadow-soft">
+              <div class="overflow-hidden">
+                <ResponsiveImage
+                  name={page.image}
+                  alt={page.label}
+                  class="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl font-semibold text-lake-950">{page.label}</h3>
+                <p class="mt-2 text-sm leading-7 text-ink-700">{page.summary}</p>
+                <span class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-lake-700">查看頁面 <Icon name="arrow" class="size-4 transition group-hover:translate-x-1" /></span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p class="mt-10"><a href="/" class="text-sm font-bold text-lake-700 underline decoration-lake-700/30 underline-offset-4 hover:text-temple-600">返回龍潭大池首頁</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
