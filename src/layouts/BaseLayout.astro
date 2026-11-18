@@ -58,12 +58,19 @@ const socialImage = new URL(image, site.url).toString();
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     )}
 
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}></script>
     <script is:inline define:vars={{ gaId: site.gaId }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', gaId, { anonymize_ip: true });
+      let analyticsAllowed = false;
+      try { analyticsAllowed = localStorage.getItem('longtan-analytics-consent') === 'granted'; } catch {}
+      if (analyticsAllowed) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId, { anonymize_ip: true });
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+        document.head.appendChild(script);
+      }
     </script>
   </head>
   <body>

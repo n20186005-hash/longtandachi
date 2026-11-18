@@ -1,0 +1,46 @@
+---
+import PolicyLayout from '../layouts/PolicyLayout.astro';
+---
+
+<PolicyLayout title="Cookie 設定" description="管理龍潭大池旅遊指南使用的必要儲存與 Google Analytics 分析 Cookie。" canonicalPath="/cookie-settings/" lead="你可以選擇是否允許網站分析 Cookie。必要的本機設定用來記住你的選擇，不作為廣告個人化用途。">
+  <section>
+    <h2>必要的儲存</h2>
+    <p>本站會在你的瀏覽器中保存一項 Cookie 偏好設定，用於記住是否同意分析功能。它不會用於建立個人旅客檔案。瀏覽器及主機服務也可能使用維持基本服務所必需的技術資訊。</p>
+  </section>
+  <section>
+    <h2>分析 Cookie（可選）</h2>
+    <p>若你同意，網站將載入 Google Analytics，以彙整頁面瀏覽與使用情況，協助改善內容。若不同意，網站不會載入 Google Analytics。變更選擇後，重新整理頁面可確保設定完整生效。</p>
+    <div class="mt-6 rounded-2xl border border-lake-900/15 bg-white p-6">
+      <p class="text-sm font-bold text-lake-950" id="cookie-status" role="status" aria-live="polite">正在讀取你的偏好設定…</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <button type="button" id="accept-analytics" class="rounded-full bg-lake-800 px-6 py-3 text-sm font-semibold text-white transition hover:bg-lake-950">允許分析 Cookie</button>
+        <button type="button" id="reject-analytics" class="rounded-full border border-lake-800/30 bg-white px-6 py-3 text-sm font-semibold text-lake-900 transition hover:bg-lake-100">拒絕分析 Cookie</button>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>清除 Cookie 與其他選擇</h2>
+    <p>你也可以透過瀏覽器設定清除本站資料或阻擋第三方 Cookie。若先前已允許分析，改為拒絕後，已儲存於瀏覽器的分析 Cookie 可能需要透過瀏覽器清除。詳見<a href="/privacy-policy/">隱私政策</a>。</p>
+  </section>
+</PolicyLayout>
+
+<script is:inline>
+  (() => {
+    const key = 'longtan-analytics-consent';
+    const status = document.getElementById('cookie-status');
+    const read = () => {
+      try { return localStorage.getItem(key); } catch { return null; }
+    };
+    const render = () => {
+      const choice = read();
+      if (status) status.textContent = choice === 'granted' ? '目前設定：允許分析 Cookie' : choice === 'denied' ? '目前設定：拒絕分析 Cookie' : '目前設定：尚未選擇（預設不啟用分析）';
+    };
+    const save = (choice) => {
+      try { localStorage.setItem(key, choice); } catch { if (status) status.textContent = '瀏覽器阻擋儲存設定，請檢查隱私設定。'; return; }
+      window.location.reload();
+    };
+    document.getElementById('accept-analytics')?.addEventListener('click', () => save('granted'));
+    document.getElementById('reject-analytics')?.addEventListener('click', () => save('denied'));
+    render();
+  })();
+</script>

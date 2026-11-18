@@ -21,10 +21,10 @@ export const site = {
 
 export const rating = {
   value: 4.3,
-  count: '10,617',
-  countRaw: 10617,
-  syncDate: '2026 年 10 月',
-  sourceNote: '評分與評價數同步自 Google 地圖使用者評價，同步時間 2026 年 10 月；版權歸原作者與 Google 地圖所有。',
+  count: '10,664',
+  countRaw: 10664,
+  syncDate: '2026 年 11 月',
+  sourceNote: '評分與評價數同步自 Google 地圖使用者評價，同步時間 2026 年 11 月；版權歸原作者與 Google 地圖所有。',
   reviewsUrl: 'https://maps.app.goo.gl/vLGKPGjG9sV4kkpA6',
 } as const;
 

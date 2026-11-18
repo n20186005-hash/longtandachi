@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  lead: string;
+}
+
+const { title, description, canonicalPath, lead } = Astro.props;
+---
+
+<BaseLayout title={`${title}｜龍潭大池旅遊指南`} description={description} canonicalPath={canonicalPath}>
+  <Header />
+  <main>
+    <section class="bg-lake-950 pt-36 pb-16 text-white md:pt-44 md:pb-20">
+      <div class="shell max-w-4xl">
+        <p class="mb-4 text-xs font-bold tracking-[0.22em] text-gold-300">網站資訊</p>
+        <h1 class="font-serif text-4xl font-semibold md:text-5xl">{title}</h1>
+        <p class="mt-6 max-w-2xl text-base leading-8 text-white/75">{lead}</p>
+      </div>
+    </section>
+    <section class="bg-mist-100 py-16 md:py-24">
+      <div class="shell max-w-4xl">
+        <div class="soft-card space-y-10 p-7 leading-8 text-ink-700 md:p-12 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-lake-950 [&_p]:mt-3 [&_a]:font-semibold [&_a]:text-lake-700 [&_a]:underline [&_a]:underline-offset-4 [&_li]:mt-2">
+          <slot />
+        </div>
+        <p class="mt-8"><a class="text-sm font-semibold text-lake-700 underline underline-offset-4" href="/">返回龍潭大池首頁</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
