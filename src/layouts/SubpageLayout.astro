@@ -17,12 +17,13 @@ interface Props {
   heroImage: 'longtan-night' | 'longtan-blue-hour' | 'longtan-golden-hour' | 'longtan-nantian-temple' | 'longtan-boardwalk';
   currentSlug: string;
   hideHeroImage?: boolean;
+  heroImageSrc?: string;
   heroActionUrl?: string;
   heroActionLabel?: string;
   heroMeta?: string[];
 }
 
-const { title, description, canonicalPath, structuredData, eyebrow, heroTitle, heroLead, heroImage, currentSlug, hideHeroImage = false, heroActionUrl = '/#transport', heroActionLabel = '交通與停車', heroMeta = [] } = Astro.props;
+const { title, description, canonicalPath, structuredData, eyebrow, heroTitle, heroLead, heroImage, currentSlug, hideHeroImage = false, heroImageSrc, heroActionUrl = '/#transport', heroActionLabel = '交通與停車', heroMeta = [] } = Astro.props;
 const related = topicPages.filter((page) => page.slug !== currentSlug);
 ---
 
@@ -30,7 +31,11 @@ const related = topicPages.filter((page) => page.slug !== currentSlug);
   <Header />
   <main>
     <section class="relative min-h-[560px] overflow-hidden bg-lake-950 pt-[4.5rem] text-white md:min-h-[620px]" aria-labelledby="subpage-title">
-      {!hideHeroImage && <div class="absolute inset-0 top-[4.5rem]">
+      {heroImageSrc && <div class="absolute inset-0 top-[4.5rem]">
+        <img src={heroImageSrc} alt={`${heroTitle}實景`} class="h-full w-full object-cover" loading="eager" fetchpriority="high" decoding="async" />
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,28,34,.9)_0%,rgba(7,28,34,.76)_46%,rgba(7,28,34,.35)_100%),linear-gradient(0deg,rgba(7,28,34,.75)_0%,transparent_70%)]"></div>
+      </div>}
+      {!hideHeroImage && !heroImageSrc && <div class="absolute inset-0 top-[4.5rem]">
         <ResponsiveImage
           name={heroImage}
           alt={heroTitle}

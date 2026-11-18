@@ -1,7 +1,7 @@
 ---
 import SubpageLayout from '../../layouts/SubpageLayout.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
-import { nearby, nearbyMap, nearbyPractical } from '../../data/nearby';
+import { nearby, nearbyMap, nearbyPractical, nearbyFieldNotes } from '../../data/nearby';
 import { site } from '../../data/site';
 
 export function getStaticPaths() {
@@ -13,6 +13,7 @@ const { item } = Astro.props as { item: Item };
 const url = `/attractions/${item.slug}/`;
 const map = nearbyMap(item.name);
 const practical = nearbyPractical[item.slug];
+const fieldNotes = nearbyFieldNotes[item.slug];
 const structuredData = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: '龍潭大池', item: site.url },
@@ -38,7 +39,7 @@ const structuredData = [
   heroTitle={item.name}
   heroLead={item.intro}
   heroImage="longtan-boardwalk"
-  hideHeroImage={true}
+  heroImageSrc={item.image}
   heroActionUrl={map}
   heroActionLabel="景點 Google 地圖"
   heroMeta={[item.duration, practical.hours, '遊客評價：Google Maps 即時查看', item.address]}
@@ -128,6 +129,17 @@ const structuredData = [
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         <article class="soft-card p-7"><h3 class="font-serif text-2xl font-semibold text-lake-950">自駕與停車</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.car}</p></article>
         <article class="soft-card p-7"><h3 class="font-serif text-2xl font-semibold text-lake-950">大眾運輸</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.publicTransit}</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-16 md:py-24" id="deeper-look">
+    <div class="shell">
+      <SectionTitle eyebrow="深入探索" title={fieldNotes.title} description={`從${item.name}的歷史背景、空間設計與遊客體驗三個角度，發現容易被匆匆路過忽略的細節。`} />
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="soft-card p-7"><p class="eyebrow">歷史背景</p><h3 class="mt-4 font-serif text-2xl font-semibold text-lake-950">從地方故事開始</h3><p class="mt-5 text-sm leading-8 text-ink-700">{fieldNotes.background}</p></article>
+        <article class="soft-card p-7"><p class="eyebrow">建築與地景</p><h3 class="mt-4 font-serif text-2xl font-semibold text-lake-950">現場有哪些可看之處？</h3><p class="mt-5 text-sm leading-8 text-ink-700">{fieldNotes.design}</p></article>
+        <article class="soft-card p-7"><p class="eyebrow">核心體驗</p><h3 class="mt-4 font-serif text-2xl font-semibold text-lake-950">怎樣玩得更深入？</h3><p class="mt-5 text-sm leading-8 text-ink-700">{fieldNotes.experience}</p></article>
       </div>
     </div>
   </section>

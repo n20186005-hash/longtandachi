@@ -22,7 +22,7 @@ const imageNames = [
 const nearbyImageNames = [
   'lingtan-street', 'shengji-pavilion', 'chung-chao-cheng-literary-park',
   'longyuan-temple', 'sankeng-old-street', 'hakka-tea-museum', 'shimen-reservoir',
-  'sankeng-eco-park', 'taoyuan-hakka-museum',
+  'sankeng-eco-park', 'taoyuan-hakka-museum', 'daping-red-bridge',
 ];
 const allowedWebsiteHosts = new Set([
   'www.google.com',
