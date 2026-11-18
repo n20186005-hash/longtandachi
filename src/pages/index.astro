@@ -6,6 +6,7 @@ import Icon from '../components/Icon.astro';
 import ResponsiveImage from '../components/ResponsiveImage.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { site, quickFacts, highlights, routes, visitorProfiles, faqs, rating, waterPlayNotice, topicPages } from '../data/site';
+import { nearby } from '../data/nearby';
 
 const structuredData = [
   {
@@ -455,6 +456,13 @@ const structuredData = [
               </div>
             </div>
           </article>
+        </div>
+        <div class="mt-10 rounded-[2rem] border border-lake-900/10 bg-mist-100 p-7 md:p-9">
+          <h3 class="font-serif text-2xl font-semibold text-lake-950">探索龍潭周邊景點</h3>
+          <p class="mt-2 text-sm leading-7 text-ink-700">從湖畔出發，閱讀每個地點的歷史、特色、遊覽路線與獨立導航。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            {nearby.map((place) => <a href={`/attractions/${place.slug}/`} class="rounded-full border border-lake-900/15 bg-white px-4 py-2.5 text-sm font-bold text-lake-800 transition hover:bg-lake-800 hover:text-white">{place.name} →</a>)}
+          </div>
         </div>
       </div>
     </section>

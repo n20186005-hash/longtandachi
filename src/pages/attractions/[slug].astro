@@ -1,0 +1,189 @@
+---
+import SubpageLayout from '../../layouts/SubpageLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import { nearby, nearbyMap, nearbyPractical } from '../../data/nearby';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return nearby.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+type Item = (typeof nearby)[number];
+const { item } = Astro.props as { item: Item };
+const url = `/attractions/${item.slug}/`;
+const map = nearbyMap(item.name);
+const practical = nearbyPractical[item.slug];
+const structuredData = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '龍潭大池', item: site.url },
+    { '@type': 'ListItem', position: 2, name: '龍潭景點推薦', item: `${site.url}/longtan-attractions/` },
+    { '@type': 'ListItem', position: 3, name: item.name, item: `${site.url}${url}` },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'TouristAttraction', name: item.name, description: item.intro,
+    url: `${site.url}${url}`, address: { '@type': 'PostalAddress', streetAddress: item.address, addressLocality: item.slug === 'shimen-reservoir' ? '大溪區' : '龍潭區', addressRegion: '桃園市', addressCountry: 'TW' },
+    hasMap: map, isAccessibleForFree: undefined },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+    { '@type': 'Question', name: item.faq, acceptedAnswer: { '@type': 'Answer', text: item.answer } },
+    { '@type': 'Question', name: `${item.name}如何安排交通？`, acceptedAnswer: { '@type': 'Answer', text: item.transport } },
+  ] },
+];
+---
+
+<SubpageLayout
+  title={`${item.name}｜歷史特色、交通導航與龍潭一日遊攻略`}
+  description={`${item.name}怎麼玩？了解${item.category}、歷史背景、建築觀察、拍照機位、停留時間與交通導航，並串連龍潭大池周邊行程。`}
+  canonicalPath={url}
+  structuredData={structuredData}
+  eyebrow={item.category}
+  heroTitle={item.name}
+  heroLead={item.intro}
+  heroImage="longtan-boardwalk"
+  hideHeroImage={true}
+  heroActionUrl={map}
+  heroActionLabel="景點 Google 地圖"
+  heroMeta={[item.duration, practical.hours, '遊客評價：Google Maps 即時查看', item.address]}
+  currentSlug="longtan-attractions"
+>
+  <section class="bg-mist-100 py-16 md:py-24" id="about">
+    <div class="shell grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div>
+        <p class="eyebrow"><span class="h-px w-8 bg-gold-500"></span>關於這處景點</p>
+        <h2 class="mt-5 font-serif text-3xl font-semibold leading-tight text-lake-950 md:text-4xl">關於{item.name}</h2>
+        <p class="mt-5 text-sm font-bold text-temple-600">{item.managerTitle}</p>
+      </div>
+      <div class="soft-card p-7 md:p-9">
+        <p class="text-sm leading-8 text-ink-700">{item.managerAbout}</p>
+        <div class="mt-6 border-t border-lake-900/10 pt-5">
+          <p class="text-xs font-bold tracking-[0.14em] text-temple-600">管理及營運相關單位</p>
+          <p class="mt-2 font-semibold text-lake-950">{item.manager}</p>
+          <a href={item.managerSource} class="mt-4 inline-block text-sm font-bold text-lake-700 underline underline-offset-4" target="_blank" rel="noopener noreferrer">查看單位及管理資料 ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="shell">
+      <p class="text-sm text-ink-700"><a class="underline underline-offset-4" href="/longtan-attractions/">龍潭景點推薦</a> / {item.name}</p>
+      <div class="mt-7 max-w-3xl">
+        <SectionTitle eyebrow="探索與引言" title={`走進${item.name}`} description={item.intro} />
+        <p class="mt-5 text-sm leading-8 text-ink-700">{item.history}</p>
+      </div>
+      <figure class="mt-8 overflow-hidden rounded-[2rem] bg-mist-100 shadow-card">
+        <img src={item.image} alt={`${item.name}現場實景`} class="aspect-[16/9] w-full object-cover" width="1200" height="675" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+        <figcaption class="px-5 py-3 text-xs text-ink-700">{item.name}實景｜圖片來源：{item.imageSource}</figcaption>
+      </figure>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <div class="soft-card p-6"><p class="eyebrow">地址與區域</p><p class="mt-3 font-semibold text-lake-950">{item.address}</p></div>
+        <div class="soft-card p-6"><p class="eyebrow">建議停留</p><p class="mt-3 font-semibold text-lake-950">{item.duration}</p></div>
+        <div class="soft-card p-6"><p class="eyebrow">景點類型</p><p class="mt-3 font-semibold text-lake-950">{item.category}</p></div>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={map} target="_blank" rel="noopener noreferrer" class="btn-primary">Google Maps 景點定位 ↗</a>
+        <a href={item.source} target="_blank" rel="noopener noreferrer" class="rounded-full border border-lake-800 px-6 py-3 text-sm font-bold text-lake-800 hover:bg-mist-100">桃園官方旅遊參考 ↗</a>
+      </div>
+      <p class="mt-4 text-xs leading-6 text-ink-700">導航前請核對景點名稱、地址與實際入口；停車場入口可能與景點主入口不同。</p>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-16 md:py-24" id="visitor-info">
+    <div class="shell">
+      <SectionTitle eyebrow="基礎資料" title="開放時間、門票與出發前準備" description="將固定的地理資訊與會變動的營運資訊分開整理，方便實際安排交通和停留時間。" />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <article class="soft-card p-7"><p class="eyebrow">開放時間</p><h3 class="mt-4 font-serif text-xl font-semibold text-lake-950">什麼時候可以參觀？</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.hours}</p></article>
+        <article class="soft-card p-7"><p class="eyebrow">門票價格</p><h3 class="mt-4 font-serif text-xl font-semibold text-lake-950">需要支付費用嗎？</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.admission}</p></article>
+        <article class="soft-card p-7"><p class="eyebrow">遊客評價</p><h3 class="mt-4 font-serif text-xl font-semibold text-lake-950">查看近期真實體驗</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.review}</p><a href={map} target="_blank" rel="noopener noreferrer" class="mt-5 inline-block text-sm font-bold text-lake-700 underline underline-offset-4">查看 Google 地圖近期評價 ↗</a></article>
+      </div>
+      <p class="mt-6 text-xs leading-6 text-ink-700">營運資料以公開資訊整理，更新核對：2026 年 11 月；即時開放及活動以管理單位公告為準。本站不顯示未取得可靠快照的星等與評論數。</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24" id="highlights">
+    <div class="shell">
+      <SectionTitle eyebrow="景區特色" title={`${item.name}的三個觀察重點`} description="從地景、建築及生活文化切入，讓這趟參觀不只停留在打卡照片。" />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {practical.experience.map((feature, index) => <article class="soft-card p-7"><span class="font-serif text-3xl font-semibold text-temple-600">0{index + 1}</span><h3 class="mt-4 text-lg font-semibold leading-8 text-lake-950">{feature}</h3></article>)}
+      </div>
+      <div class="mt-10 rounded-[2rem] bg-mist-100 p-7 md:p-9">
+        <h3 class="font-serif text-2xl font-semibold text-lake-950">遊覽建議</h3>
+        <p class="mt-3 text-sm leading-8 text-ink-700">{practical.arrival}</p>
+        <p class="mt-3 text-sm leading-8 text-ink-700">{practical.accessibility}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-16 md:py-24">
+    <div class="shell grid gap-12 lg:grid-cols-2">
+      <div><SectionTitle eyebrow="歷史與文化" title={`為什麼值得走進${item.name}`} description={item.history} /></div>
+      <div class="space-y-7">
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">建築與地景觀察</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.architecture}</p></article>
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">現場特色與核心體驗</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.highlight}</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24" id="getting-here">
+    <div class="shell">
+      <SectionTitle eyebrow="交通方式" title="自駕、公車與步行怎麼選？" description={practical.arrival} />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <article class="soft-card p-7"><h3 class="font-serif text-2xl font-semibold text-lake-950">自駕與停車</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.car}</p></article>
+        <article class="soft-card p-7"><h3 class="font-serif text-2xl font-semibold text-lake-950">大眾運輸</h3><p class="mt-4 text-sm leading-8 text-ink-700">{practical.publicTransit}</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="shell grid gap-12 lg:grid-cols-2">
+      <div>
+        <SectionTitle eyebrow="遊覽建議" title="不趕路的步行順序" description="依照景點特性安排主題與停留順序；交通時間請依當日路況調整。" />
+        <ol class="mt-8 space-y-5">
+          {item.route.map((step, index) => <li class="flex items-start gap-4"><span class="grid size-9 shrink-0 place-items-center rounded-full bg-lake-800 text-sm font-bold text-white">{index + 1}</span><p class="pt-1 text-base leading-7 text-lake-950">{step}</p></li>)}
+        </ol>
+      </div>
+      <div class="space-y-6">
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">交通與導航</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.transport}</p><a href={map} class="mt-4 inline-block font-bold text-lake-700 underline underline-offset-4" target="_blank" rel="noopener noreferrer">開啟專屬景點地圖 ↗</a></article>
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">拍照機位</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.photo}</p></article>
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">遊覽須知</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.highlight} 開放資訊、交通管制及個別活動可能調整，建議行前查閱管理相關單位的最新公告。</p></article>
+        <article class="soft-card p-7"><h2 class="font-serif text-2xl font-semibold text-lake-950">住宿與行程銜接</h2><p class="mt-3 text-sm leading-8 text-ink-700">{item.area.includes('市區') ? '若想停留到傍晚，可將龍潭市區作為住宿與晚餐的據點，並於隔日前往三坑或石門水庫。' : '可依旅遊動線比較龍潭市區與石門水庫周邊合法住宿；需要參加早場導覽或活動時，先確認交通及入住安排。'} 訂房前留意交通時間與取消條款。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist-100 py-16 md:py-24">
+    <div class="shell">
+      <SectionTitle eyebrow="常見問題" title={`${item.name}出發前先知道`} />
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        <article class="soft-card p-7"><h2 class="font-semibold text-lake-950">{item.faq}</h2><p class="mt-3 text-sm leading-7 text-ink-700">{item.answer}</p></article>
+        <article class="soft-card p-7"><h2 class="font-semibold text-lake-950">怎麼查最新開放時間與評價？</h2><p class="mt-3 text-sm leading-7 text-ink-700">請查閱<a class="underline" href={item.source}>官方旅遊資料</a>與<a class="underline" href={map}>Google 地圖的該景點頁</a>。本站不臆測即時營業時刻、評分或評論數。</p></article>
+        <article class="soft-card p-7"><h2 class="font-semibold text-lake-950">安排多久比較合適？</h2><p class="mt-3 text-sm leading-7 text-ink-700">建議預留 {item.duration}，若想細看{item.category}、參加活動或拍照，可增加彈性時間。</p></article>
+        <article class="soft-card p-7"><h2 class="font-semibold text-lake-950">如何從龍潭大池順遊？</h2><p class="mt-3 text-sm leading-7 text-ink-700">{item.transport} 可先參考本頁編號路線與<a class="underline" href="/longtan-attractions/">龍潭景點總覽</a>決定半日或一日行程。</p></article>
+      </div>
+      <div class="mt-10"><a href="/longtan-attractions/" class="font-bold text-lake-700 underline underline-offset-4">探索更多龍潭景點 →</a></div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24" id="location">
+    <div class="shell grid gap-9 lg:grid-cols-[0.9fr_1.1fr]">
+      <div><SectionTitle eyebrow="交通指南" title={`前往${item.name}`} description={item.transport} /></div>
+      <div class="soft-card p-7 md:p-9">
+        <p class="text-xs font-bold tracking-[0.14em] text-temple-600">導航地址</p>
+        <p class="mt-3 text-lg font-semibold text-lake-950">{item.address}</p>
+        <a href={map} class="btn-primary mt-7" target="_blank" rel="noopener noreferrer">在 Google 地圖搜尋此景點 ↗</a>
+        <p class="mt-5 text-sm leading-7 text-ink-700">若地圖顯示多個結果，請以景點全名與地址核對目的地。實際入口、停車或收費請依現場標示。</p>
+      </div>
+    </div>
+  </section>
+  <section class="bg-mist-100 py-16 md:py-24" id="more-attractions">
+    <div class="shell">
+      <SectionTitle eyebrow="更多周邊專頁" title="龍潭周邊還能怎麼玩？" description="這些目的地都有各自的景點資訊、實景照片與地圖入口，可依時間安排順遊。" />
+      <div class="mt-9 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {nearby.filter((place) => place.slug !== item.slug).slice(0, 6).map((place) => (
+          <a href={`/attractions/${place.slug}/`} class="soft-card group overflow-hidden transition hover:-translate-y-1 hover:shadow-soft">
+            <img src={place.image} alt={`${place.name}實景`} class="aspect-[16/10] w-full object-cover" width="640" height="400" loading="lazy" decoding="async" />
+            <div class="p-6"><p class="text-xs font-bold text-temple-600">{place.category}</p><h3 class="mt-2 font-serif text-xl font-semibold text-lake-950">{place.name}</h3><p class="mt-3 text-sm leading-7 text-ink-700">{place.intro}</p><span class="mt-4 inline-block text-sm font-bold text-lake-700">閱讀景點指南 →</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</SubpageLayout>

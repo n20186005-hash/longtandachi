@@ -19,6 +19,11 @@ const imageNames = [
   'longtan-boardwalk',
   'longtan-nantian-temple',
 ];
+const nearbyImageNames = [
+  'lingtan-street', 'shengji-pavilion', 'chung-chao-cheng-literary-park',
+  'longyuan-temple', 'sankeng-old-street', 'hakka-tea-museum', 'shimen-reservoir',
+  'sankeng-eco-park', 'taoyuan-hakka-museum',
+];
 const allowedWebsiteHosts = new Set([
   'www.google.com',
   'www.googletagmanager.com',
@@ -29,6 +34,16 @@ const allowedWebsiteHosts = new Set([
   'maps.app.goo.gl',
   'travel.tycg.gov.tw',
   'www.longtan.tycg.gov.tw',
+  'cyberisland.teldap.tw',
+  'ws.tycg.gov.tw',
+  'dynamic-media-cdn.tripadvisor.com',
+  'www.hakkatea.tw',
+  'tyc.tycg.gov.tw',
+  'nchdb.boch.gov.tw',
+  'news.tycg.gov.tw',
+  'www.tad.gov.tw',
+  'www.hakka.tycg.gov.tw',
+  'law.moea.gov.tw',
 ]);
 const errors = [];
 
@@ -48,6 +63,18 @@ for (const name of imageNames) {
     } catch {
       errors.push(`缺少圖片：${file}`);
     }
+  }
+}
+for (const name of nearbyImageNames) {
+  const file = resolve(root, `public/images/nearby-${name}.jpg`);
+  try {
+    const info = await stat(file);
+    const bytes = await readFile(file);
+    if (!info.isFile() || info.size < 20_000 || bytes[0] !== 0xff || bytes[1] !== 0xd8) {
+      errors.push(`周邊景點照片無效：${name}`);
+    }
+  } catch {
+    errors.push(`缺少周邊景點本地照片：${name}`);
   }
 }
 
